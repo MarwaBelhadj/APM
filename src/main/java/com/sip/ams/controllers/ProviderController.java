@@ -1,6 +1,8 @@
 package com.sip.ams.controllers;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +31,14 @@ public class ProviderController {
 	
 	@GetMapping("/list")// ce que je tape dans l'url
 	public String listProviders(Model model) {
-		
-		model.addAttribute("providers",providerRepository.findAll());
-		return"provider/listProviders"; //retourne la vue de listproviders.html
+		 List<Provider> lp =(List<Provider>)providerRepository.findAll();
+    	 if (lp.size()==0) lp=null;
+         model.addAttribute("providers", lp); 
+         return "provider/listProviders";//retourne la vue de listproviders.html
 	}
 	
+	
+	//C'est une méthode pour afficher le formulaire vide 
 	@GetMapping("/add")
 	public String showAddProviderForm(Model model) {
 		
@@ -41,23 +46,24 @@ public class ProviderController {
 		model.addAttribute("provider",provider);
 		return"provider/addProvider";
 	}
-	
+	//C'est la méthode pour remplir les champs du formulaire
 	@PostMapping("/add")
-	public String addProvider(@Valid Provider provider, BindingResult result, Model model) {
+	public String addProvider(@Valid Provider provider, BindingResult result) {
 		if (result.hasErrors()) {
+			// return "redirect:add" ; On peut faire mais ça peut causer un conflit car on a une autre "add" dans GetMapping
 			return"provider/addProvider";
 		}
 		providerRepository.save(provider);
-		return "redirect:list"; //c'estv pour rafréchir la liste?
+		return "redirect:list"; //c'est pour revenir à la liste 
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String deleteProvider(@PathVariable("id") long id, Model model) {
 	
 		Provider provider = providerRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Invald provider Id :" +id));
-		System.out.println("suite du programme ...");
+		//System.out.println("suite du programme ...");
 		providerRepository.delete(provider);
-		return"redirect:list"; //j'ai pas compris cette redirection
+		return"redirect:../list"; 
 	}
 	@GetMapping("/edit/{id}")
 	public String editProvider(@PathVariable("id") long id, Model model) {
@@ -71,6 +77,6 @@ public class ProviderController {
 			return"provider/updateProvider";
 		}
 		providerRepository.save(provider);
-		return "redirect:list"; 
+		return "redirect:..list"; 
 	}
 }
