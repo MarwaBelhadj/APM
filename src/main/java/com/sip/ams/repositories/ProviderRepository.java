@@ -1,4 +1,4 @@
-package com.sip.ams.repository;
+package com.sip.ams.repositories;
 
 import java.util.List;
 

@@ -16,7 +16,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 public class Article {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO) //Généré par Hibernate Sequence 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	@NotBlank(message=" Label is mandatory")
@@ -30,25 +30,8 @@ public class Article {
 	@Column(name = "picture")
 	 private String picture;
 
-	
-	public String getPicture() {
-		return picture;
-	}
-
-
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-
-
 	public Article() {
 		
-	}
-
-
-	@Override
-	public String toString() {
-		return "Article [id=" + id + ", label=" + label + ", price=" + price + ", provider=" + provider + "]";
 	}
 
 
@@ -57,14 +40,15 @@ public class Article {
 		this.label = label;
 		this.price = price;
 	}
-	
 
 
-	public Article(@NotBlank(message = " Label is mandatory") String label, float price, String picture) {
+	public Article(@NotBlank(message = " Label is mandatory") String label, float price, String picture,
+			Provider provider) {
 		super();
 		this.label = label;
 		this.price = price;
 		this.picture = picture;
+		this.provider = provider;
 	}
 
 
@@ -98,6 +82,15 @@ public class Article {
 	}
 	
 	//*****Many to one Provider ****//'e"'
+
+	public String getPicture() {
+		return picture;
+	}
+
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 
 	@ManyToOne(fetch=FetchType.LAZY , optional = false)
 	@JoinColumn(name="provider_id", nullable = false)
