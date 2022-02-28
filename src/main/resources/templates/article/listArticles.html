@@ -40,43 +40,43 @@
 										<td th:text="${article.price}"></td>
 										<td th:text="${article.provider.name}"></td>
 										<td><a th:href="@{/article/show/{id}(id=${article.id})}"
-												class="btn btn-success"><i class="fas fa-user-show ml-2"> </i> Show
+												class="btn btn-success"><i class="fas fa-eye ml-2"> </i> Show
 												details </a></td>
 										<td><a th:href="@{/article/edit/{id}(id=${article.id})}" class="btn btn-info"><i
 													class="fas fa-user-edit ml-2"> </i> Edit</a> </td>
 										<td>
-											<!-- Button trigger modal -->
-											<button type="button" class="btn btn-danger" data-toggle="modal"
-												th:attr="data-target='#articleDeleteModal'+${article.id}"><i class="fas fa-user-times ml-2"></i>
-												Delete
-											</button>
-
-											<!-- Modal -->
-											<div class="modal fade" th:attr="id='articleDeleteModal'+${article.id}" tabindex="-1" role="dialog"
-												aria-labelledby="articleDeleteModalLabel" aria-hidden="true">
-												<div class="modal-dialog">
-													<div class="modal-content">
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal"
-																aria-label="Close"><span
-																	aria-hidden="true">&times;</span></button>
-															<h5 class="modal-title" id="articleDeleteModalLabel" align="left">Delete
-																Article</h5>
-														</div>
-														<div class="modal-body">
-															<h5 align="center"> Are you sure to delete this article ?!!!
-															</h5>
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-default"
-																data-dismiss="modal">No</button>
-															
-															<a th:href="@{/article/delete/{id}(id=${article.id})}" class="btn btn-danger"> Yes Delete</a> 
-										              
+												<!-- Button trigger modal -->
+												<button type="button" class="btn btn-danger" data-toggle="modal"
+													th:attr="data-target='#articleDeleteModal'+${article.id}"><i class="fas fa-user-times ml-2"></i>
+													Delete
+												</button>
+	
+												<!-- Modal -->
+												<div class="modal fade" th:attr="id='articleDeleteModal'+${article.id}" tabindex="-1" role="dialog"
+													aria-labelledby="articleDeleteModalLabel" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close"><span
+																		aria-hidden="true">&times;</span></button>
+																<h5 class="modal-title" id="articleDeleteModalLabel" align="left">Delete
+																	Article</h5>
+															</div>
+															<div class="modal-body">
+																<h5 align="center"> Are you sure to delete this article ?!!!
+																</h5>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default"
+																	data-dismiss="modal">No</button>
+																
+																<a th:href="@{/article/delete/{id}(id=${article.id})}" class="btn btn-danger"> Yes Delete</a> 
+											              
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 										</td>
 									</tr>
 								</tbody>
